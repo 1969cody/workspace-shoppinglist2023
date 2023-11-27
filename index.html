@@ -36,21 +36,52 @@
   <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyAzcwgZuLA7dO9g4sQhXQVTUgCo0M8m2qM",
-      authDomain: "grocerylist-91956.firebaseapp.com",
-      databaseURL: "https://grocerylist-91956.firebaseio.com",
-      projectId: "grocerylist-91956",
-      storageBucket: "grocerylist-91956.appspot.com",
-      messagingSenderId: "813812426276",
-      appId: "1:813812426276:web:93e5897af12892ff78dab1",
-      measurementId: "G-VZ83BTR72T"
-    }; 
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjeMO612mdgsbSbn_iwmjiUCKj2PB-VuI",
+    authDomain: "database-2023-f2fb8.firebaseapp.com",
+    projectId: "database-2023-f2fb8",
+    storageBucket: "database-2023-f2fb8.appspot.com",
+    messagingSenderId: "550346050899",
+    appId: "1:550346050899:web:dab5b45c1eb706cecaa5a6",
+    measurementId: "G-LW20QZZKXB"
+  }; 
     // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
+  
+  //  Read the data from the database and update the list 
+  $("li").remove();
+
+  db.collection("shopping list").get().then((querySnapshot) => {
+    console.log(querySnapshot);
+    querySnapshot.array.forEach((doc) => {
+      
+    });((doc) => {
+      var item = doc.data().item;
+      console.log("Loading...", item)
+      newlist += "<li class = 'cool'>" + item + "</li>";
+      //$("#todo").append("<li>"+ item + "</li>");
+    })
+    // Update the list 
+    $("#todo").append();
+    // Make it clickabe
+  });
 
     // Save the list to database
+    $("#save").click(function(){
+      // Testing if the database is connected 
+      // Clear the database before you save
+      $("li").each(function(){
+        var value = $(this).text();
+        console.log("Saving ", value);
+        db.collection("shopping list").add(value); 
+
+      })
+    
+      // db.collection("shopping list").add({item : "apple"});
+
+    });
+
 
 
   </script>
